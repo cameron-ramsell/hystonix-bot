@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<title>Hystonix ~ Terms of Service</title>
+
+		<link href="/static/css/styles.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300" rel="stylesheet">
+	</head>
+	<body>
+
+		<div class="top">
+			<div class="content">
+			<h1>Hystonix > Terms of Service</h1>
+			</div>
+		</div>	
+		<div class="content">
+			<p>
+				By accessing or otherwise using services provided by Senior Team, You accept and agree to be bound by the terms of this agreement.
+				These services include but are not limited to: The website provided by Senior Team; The purchase of services or otherwise payment for any product provided by Senior Team.
+				If you do not agree to these terms, immediately cease your use of our (Senior Team) services.
+
+				<br><br>
+
+				<h2>1. Privacy Policy</h2>
+				Here at Senior Team, we store minimal data on our clients to ensure privacy. However, some data is stored to ensure both you (The user) and us (Senior Team) are protected, as well
+				as to allow the site to function.<br><br>
+
+				<b>1a. IP Addresses</b><br>
+					We store hashed IP Addresses to ensure our safety during the transaction process, we will store the hashed IP address up to 180 days. However, in a case where the IP address
+					is connected to an account suspended from our services, we will store a hashed IP address for an indefinite amount of time.
+				<br><br>
+				<b>1b. Cookies</b><br>
+					Here at Senior Team, we may use cookies in our web services to enhance the experience. As well as this, external services may also use cookies
+				<br><br>
+
+				<h2>2. Liability</h2>
+				The information provided by the site is regarded by us to be accurate, however we shall not be responsible or liable for any error in the information provided throughout all of our services
+
+				<br><br>
+				<h2>3. Intellectual Property</h2><br>
+				All content provided in all services provided by Senior Team are assumed to be property of Senior Team, or one of our partners, and so are protected by copyright law.<br>
+				You are forbidden from using any content owned by Senior Team without explicit permission from us or a partner.
+
+				<br><br>
+				<h2>4. Payment Policy</h2><br>
+				We accept payments for our services through Paypal, after payment services will begin.
+
+				<br><br>
+				<b>4a. Appropriate time for product delivery</b><br>
+				We give clients an estimated time for a commission to be completed, however this should not be regarded as an exact time and should be regarded exclusively as an estimated time-frame.
+				After payment, you do not have the right to refund during the commission process, however: If an excessive amount of time is taken to produce your desired product, you may be entitled to a refund (at our discretion)
+
+				<br><br>
+				<b>4b. Refund policy</b><br>
+				Under no circumstances will you forcefully attempt to retract payments given by you to Senior Team, through either the process of a chargeback or other means, unless by law you have the right.
+				You do not have the right to refund any form of payment for any reason. We (Senior Team) may offer refunds, but at our own discretion and it should be assumed that a refund is not approved of.
+
+				<br><br>	
+				<h2>5. Termination</h2><br>
+				We reserve the right, at any time, to terminate any form of service we have with you, for any reason. If you are mid-service, you will be refunded in-full.
+
+				<br><br>
+				<h2>6. Notification</h2><br>
+				We reserve the right to update our terms of service at any time, and your continued use of our services automatically signifies your acceptance of our new terms. We will attempt to notify you in the event of an update, however this can not be guaranteed (unless required to by law)
+
+			</p>
+			<% if(token) { %>
+			<form action="#" method="post">
+				<input type="checkbox" name="agreement" value="true" required> I agree to the Terms of Service and Privacy Policy.
+				<input type="hidden" name="account" value="<%= token %>">
+				<input type="submit" value="Go">
+			</form>
+			<% } %>
+		</div>
+	</body>
+
+</html>
