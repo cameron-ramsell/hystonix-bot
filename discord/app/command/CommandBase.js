@@ -1,5 +1,7 @@
 const DiscordJS = require("discord.js");
 
+const Wait = require(__root + "/app/util/Wait.js");
+
 module.exports = class CommandBase {
 
 	constructor(name, permissableLevel, ticketOnly = false) {
@@ -17,7 +19,7 @@ module.exports = class CommandBase {
 
 	}
 	
-	error(msg, content) {
+	async error(msg, content) {
 
 		let embed = new DiscordJS.RichEmbed();
 
@@ -25,8 +27,12 @@ module.exports = class CommandBase {
 		embed.addField("Error", content);
 		embed.setFooter(msg.author.username, msg.author.avatarURL);
 
-		msg.channel.send(embed);
+		let errorMessage = await msg.channel.send(embed);
 
+		await Wait.untilTime(5000);
+
+		errorMessage.delete();
+		msg.delete();
 	}
 
 }

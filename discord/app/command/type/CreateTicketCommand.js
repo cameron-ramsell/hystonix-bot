@@ -1,6 +1,8 @@
 const DiscordJS = require("discord.js");
 const CommandBase = require(__root + "/app/command/CommandBase.js");
 
+const Wait = require(__root + "/app/util/Wait.js");
+
 module.exports = class CreateTicketCommand extends CommandBase {
 
 	constructor(ticketController) {
@@ -19,7 +21,12 @@ module.exports = class CreateTicketCommand extends CommandBase {
 
 		embed.setDescription("Your new ticket was created in the channel " + ticket);
 
-		msg.channel.send(embed);
+		embed = await msg.channel.send(embed);
+	
+		await Wait.untilTime(5000);
+
+		embed.delete();
+		msg.delete();
 	}
 
 }

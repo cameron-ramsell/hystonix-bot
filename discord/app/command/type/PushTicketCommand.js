@@ -3,6 +3,8 @@ const DiscordJS = require("discord.js");
 const CommandBase = require(__root + "/app/command/CommandBase.js");
 const Ticket = require(__root + "/app/ticket/Ticket.js");
 
+const Wait = require(__root + "/app/util/Wait.js");
+
 module.exports = class PushTicketCommand extends CommandBase {
 
 	constructor(ticketController) {
@@ -28,6 +30,19 @@ module.exports = class PushTicketCommand extends CommandBase {
 			return this.error(msg, "Ticket must have an assigned role to push");
 
 		this.ticketController.pushTicket(ticket);
+
+		let embed = new DiscordJS.RichEmbed();
+
+		embed.setTitle("Ticket pushed to online freelancers");
+		embed.setDescription("The ticket was sent to online freelancers");
+		embed.setColor("AQUA");
+
+		embed = await msg.channel.send(embed);
+
+		await Wait.untilTime(5000);
+
+		embed.delete();
+		msg.delete();
 
 	}
 

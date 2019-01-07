@@ -10,58 +10,9 @@ const CreateAssignedRoleAction = require(__root + "/app/db/type/CreateAssignedRo
 const CreateTicketMemberAction = require(__root + "/app/db/type/CreateTicketMemberAction.js");
 const DeleteAssignedRoleAction = require(__root + "/app/db/type/DeleteAssignedRoleAction.js");
 
-const TicketState = {
-
-	Unknown: 0,
-
-	Opened: 1,
-	OpenedAwaitingChoice: 2,
-
-	Archived: 9999,
-
-	OpenSupport: 100,
-
-	OpenAutomatic: 105,
-	OpenAutomaticAwaitingResponse: 106,
-
-	OpenTermsOfService: 200,
-	OpenAwaitingTermsOfServiceResponse: 201,
-	OpenTermsOfServiceAccepted: 202,
-
-	OpenManualSetup: 205,
-
-	OpenPushed: 900,
-
-	OpenAwaitingFreelancer: 1000,
-	OpenFreelancerQuote: 1001,
-
-	OpenPayment: 2000,
-	OpenAwaitingPayment: 2002,
-	OpenPaymentReceived: 2003,
-
-	OpenInProgress: 1002,
-
-	ClosingAwaitingClientConfirmation: 2001,
-	ClosingAwaitingManagementConfirmation: 2002,
-
-	GraceProjectComplete: 5000,
-	GraceProjectCancelledByClient: 5001,
-	GraceProjectCancelledByManagement: 5002,
-
-};
-
-const StoredMessageType = {
-
-	InitialMessage: 0,
-	TermsOfService: 1,
-	CommissionAd: 2
-
-};
-
-const MemberType = {
-	Viewer: 0,
-	Participant: 1
-};
+const TicketState = require(__root + "/app/ticket/TicketState.js");
+const MemberType = require(__root + "/app/ticket/MemberType.js");
+const StoredMessageType = require(__root + "/app/ticket/StoredMessageType.js");
 
 module.exports = class Ticket {
 
@@ -353,7 +304,7 @@ module.exports = class Ticket {
 	}
 
 	async removeRole(role) {
-		this.assignedRoles.slice(this.assignRoles.indexOf(role), 1);
+		this.assignedRoles.slice(this.assignedRoles.indexOf(role), 1);
 
 		return await this.databaseController.executeAction(new DeleteAssignedRoleAction(this.id, role.id));
 	}

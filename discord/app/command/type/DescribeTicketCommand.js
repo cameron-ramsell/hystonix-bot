@@ -3,6 +3,8 @@ const DiscordJS = require("discord.js");
 const CommandBase = require(__root + "/app/command/CommandBase.js");
 const Ticket = require(__root + "/app/ticket/Ticket.js");
 
+const Wait = require(__root + "/app/util/Wait.js");
+
 module.exports = class DescribeTicketCommand extends CommandBase {
 
 	constructor(ticketController) {
@@ -35,11 +37,15 @@ module.exports = class DescribeTicketCommand extends CommandBase {
 		let embed = new DiscordJS.RichEmbed();
 
 		embed.setTitle("Description updated");
-		embed.setDescription("The description for the ticket was updated");
-		embed.addField("Description", message);
+		embed.setDescription(`The description for the ticket was updated \`\`\`${message}\`\`\``);
 		embed.setColor("AQUA");
 
-		msg.channel.send(embed);
+		embed = await msg.channel.send(embed);
+
+		await Wait.untilTime(5000);
+
+		embed.delete();
+		msg.delete();
 
 	}
 

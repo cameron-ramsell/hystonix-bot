@@ -3,6 +3,8 @@ const DiscordJS = require("discord.js");
 const CommandBase = require(__root + "/app/command/CommandBase.js");
 const Ticket = require(__root + "/app/ticket/Ticket.js");
 
+const Wait = require(__root + "/app/util/Wait.js");
+
 module.exports = class AssignTicketCommand extends CommandBase {
 
 	constructor(ticketController) {
@@ -53,11 +55,15 @@ module.exports = class AssignTicketCommand extends CommandBase {
 		let embed = new DiscordJS.RichEmbed();
 
 		embed.setTitle("Assigned to ticket");
-		embed.setDescription("Roles were assigned to the ticket");
-		embed.addField("Assigned", assignVerbose.join("\n"));
+		embed.setDescription(assignVerbose.join(" ") + " were assigned to the ticket");
 		embed.setColor("AQUA");
 
-		msg.channel.send(embed);
+		embed = await msg.channel.send(embed);
+
+		await Wait.untilTime(5000);
+
+		embed.delete();
+		msg.delete();
 
 	}
 
